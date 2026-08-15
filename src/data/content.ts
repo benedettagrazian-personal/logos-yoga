@@ -499,8 +499,8 @@ export const aboutPage = {
         text: "'Logos' — parola greca per 'ragione', 'parola', 'principio ordinatore' — riflette la nostra filosofia: lo yoga come strumento per ritrovare ordine interiore, chiarezza e connessione con il sé autentico.",
       },
       {
-        title: "Una comunità che cresce",
-        text: "Nel corso degli anni abbiamo accolto migliaia di studenti e formato insegnanti, costruendo una comunità che va oltre le quattro mura della nostra sala.",
+        title: "Un'Associazione che coniuga Yoga e Sport",
+        text: "L'Associazione Lys nasce con l'obiettivo di promuovere la crescita personale e sinergica di corpo, mente e stili di vita, rispettosi degli equilibri biologici. Ci rivolgiamo ad atleti e chiunque voglia imparare dall'antica conoscenza dello Yoga.",
       },
     ],
   },
