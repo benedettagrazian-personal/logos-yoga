@@ -9,6 +9,14 @@ const PX_PER_MINUTE = 1.6;
 // proporzionale alla loro reale durata.
 const IDLE_GAP_MAX_PX = 28;
 
+// Sfondo molto tenue per differenziare le classi per insegnante, basato
+// sui colori già usati nel resto del sito.
+const TEACHER_BACKGROUNDS: Record<string, string> = {
+  "Tatiana Pacini": "rgba(92, 74, 58, 0.07)",
+  "Monica Formica": "rgba(155, 175, 155, 0.18)",
+  "Debora Pugi": "rgba(184, 206, 222, 0.3)",
+};
+
 function parseTimeToMinutes(label: string): number {
   const [h, m] = label.split(":").map(Number);
   return h * 60 + (m || 0);
@@ -101,6 +109,8 @@ export default function WeeklySchedule() {
                           top: timeAxis.toPx(slot.start),
                           minHeight:
                             timeAxis.toPx(slot.end) - timeAxis.toPx(slot.start),
+                          backgroundColor:
+                            TEACHER_BACKGROUNDS[yogaClass.teacher],
                         }}
                       >
                         <p className="text-xs font-semibold text-[#5C4A3A] mb-0.5">
