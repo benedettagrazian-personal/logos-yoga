@@ -9,12 +9,11 @@ const PX_PER_MINUTE = 1.6;
 // proporzionale alla loro reale durata.
 const IDLE_GAP_MAX_PX = 28;
 
-// Sfondo molto tenue per differenziare le classi per insegnante, basato
-// sui colori già usati nel resto del sito.
+// Sfondo molto tenue per differenziare le classi per insegnante.
 const TEACHER_BACKGROUNDS: Record<string, string> = {
-  "Tatiana Pacini": "rgba(92, 74, 58, 0.07)",
-  "Monica Formica": "rgba(155, 175, 155, 0.18)",
-  "Debora Pugi": "rgba(184, 206, 222, 0.3)",
+  "Tatiana Pacini": "#E7F9FF",
+  "Monica Formica": "#E8F9EA",
+  "Debora Pugi": "#FFFBE7",
 };
 
 function parseTimeToMinutes(label: string): number {
