@@ -478,7 +478,7 @@ export const homePage = {
 export const aboutPage = {
   hero: {
     title: "La nostra storia",
-    subtitle: "Yoga, comunità e trasformazione da oltre un decennio.",
+    subtitle: "Yoga & Sport: un binomio vincente",
   },
   story: {
     title: "Le origini",
