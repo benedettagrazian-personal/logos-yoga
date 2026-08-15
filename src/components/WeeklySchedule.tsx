@@ -11,9 +11,9 @@ const IDLE_GAP_MAX_PX = 28;
 
 // Sfondo molto tenue per differenziare le classi per insegnante.
 const TEACHER_BACKGROUNDS: Record<string, string> = {
-  "Tatiana Pacini": "#E7F9FF",
-  "Monica Formica": "#E8F9EA",
-  "Debora Pugi": "#FFFBE7",
+  "Tatiana Pacini": "rgba(231, 249, 255, 0.5)",
+  "Monica Formica": "rgba(232, 249, 234, 0.5)",
+  "Debora Pugi": "rgba(255, 251, 231, 0.5)",
 };
 
 function parseTimeToMinutes(label: string): number {
