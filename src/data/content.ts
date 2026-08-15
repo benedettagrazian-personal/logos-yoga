@@ -375,12 +375,16 @@ export const weeklySchedule: ScheduleSlot[] = [
     },
   },
   {
-    time: "7:30",
+    time: "7:30 – 8:30",
     classesByDay: {
-      Venerdì: {
-        title: "Yoga e Meditazione Antistress (su richiesta)",
-        teacher: "Monica Formica",
-      },
+      Lunedì: { title: "Sri Sri Yoga", teacher: "Monica Formica" },
+      Mercoledì: { title: "Sri Sri Yoga", teacher: "Monica Formica" },
+    },
+  },
+  {
+    time: "7:30 – 9:00",
+    classesByDay: {
+      Venerdì: { title: "Yoga e Meditazione", teacher: "Monica Formica" },
     },
   },
   {
@@ -388,6 +392,13 @@ export const weeklySchedule: ScheduleSlot[] = [
     classesByDay: {
       Martedì: { title: "Yoga, Respiro e Meditazione", teacher: "Monica Formica" },
       Mercoledì: { title: "Yoga, Meditazione e Conoscenza", teacher: "Monica Formica" },
+    },
+  },
+  {
+    time: "9:30 – 11:00",
+    classesByDay: {
+      Lunedì: { title: "Meditazione e Yoga", teacher: "Monica Formica" },
+      Venerdì: { title: "Sri Sri Yoga", teacher: "Monica Formica" },
     },
   },
   {
