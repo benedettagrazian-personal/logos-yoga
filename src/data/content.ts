@@ -500,7 +500,7 @@ export const aboutPage = {
       },
       {
         title: "Un'Associazione che coniuga Yoga e Sport",
-        text: "L'Associazione Lys nasce con l'obiettivo di promuovere la crescita personale e sinergica di corpo, mente e stili di vita, rispettosi degli equilibri biologici. Ci rivolgiamo ad atleti e chiunque voglia imparare dall'antica conoscenza dello Yoga.",
+        text: "L'Associazione Lys promuove la crescita personale e sinergica di corpo, mente e stili di vita, rispettosi degli equilibri biologici. Ci rivolgiamo ad atleti e chiunque voglia imparare dall'antica conoscenza dello Yoga.",
       },
     ],
   },
