@@ -456,6 +456,57 @@ export const weeklySchedule: ScheduleSlot[] = [
 
 export const whatsappBookingUrl = "https://chat.whatsapp.com/JV1F8seCfPr9M9KUs9Rnek";
 
+// ─── Prezzi ────────────────────────────────────────────────────────────────
+
+export interface PricingItem {
+  label: string;
+  price: string;
+  description?: string;
+}
+
+export interface PricingGroup {
+  title: string;
+  items: PricingItem[];
+}
+
+export const pricing: { groups: PricingGroup[]; note: string } = {
+  groups: [
+    {
+      title: "Tesseramento e Iscrizione",
+      items: [
+        {
+          label: "Quota associativa annuale",
+          price: "€10",
+          description: "Obbligatoria per tutti i soci, con validità annuale",
+        },
+      ],
+    },
+    {
+      title: "Lezioni Singole e Individuali",
+      items: [
+        { label: "Lezione singola (Drop-in)", price: "€10" },
+        { label: "Lezione individuale", price: "€15" },
+      ],
+    },
+    {
+      title: "Pacchetti e Carnet",
+      items: [
+        {
+          label: "Pacchetto 10 lezioni",
+          price: "€80",
+          description: "Frequenza bisettimanale — validità 6 settimane",
+        },
+        {
+          label: "Carnet 10 lezioni",
+          price: "€90",
+          description: "Frequenza libera — validità 3 mesi",
+        },
+      ],
+    },
+  ],
+  note: "Tutte le quote sono intese come contributo destinato al sostegno e allo svolgimento delle attività istituzionali dell'associazione.",
+};
+
 // ─── Navigazione ───────────────────────────────────────────────────────────
 
 export const navLinks = [

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import TeacherCard from "@/components/TeacherCard";
 import WeeklySchedule from "@/components/WeeklySchedule";
-import { teachers } from "@/data/content";
+import { teachers, pricing } from "@/data/content";
 
 export const metadata: Metadata = {
   title: "Classi",
@@ -99,28 +99,40 @@ export default function ClassiPage() {
           >
             Prezzi
           </h2>
-          <p className="text-[#2C2C2C]/70 leading-relaxed mb-6">
+          <p className="text-[#2C2C2C]/70 leading-relaxed mb-8">
             Scegli la frequenza che fa per te. Più pratichi, più il costo per
             lezione si riduce.
           </p>
-          <div className="flex flex-col gap-3 text-left">
-            {[
-              { label: "Lezione singola", price: "€18" },
-              { label: "Carnet 10 lezioni", price: "€150" },
-              { label: "Abbonamento mensile illimitato", price: "€110/mese" },
-              { label: "Abbonamento trimestrale", price: "€300/trimestre" },
-            ].map(({ label, price }) => (
-              <div
-                key={label}
-                className="flex items-center justify-between bg-white rounded-[1rem] px-5 py-3.5"
-              >
-                <span className="text-sm text-[#2C2C2C]">{label}</span>
-                <span className="text-sm font-semibold text-[#5C4A3A]">
-                  {price}
-                </span>
+          <div className="flex flex-col gap-8">
+            {pricing.groups.map((group) => (
+              <div key={group.title}>
+                <h3 className="text-sm font-semibold text-[#5C4A3A] uppercase tracking-wide mb-3 text-left">
+                  {group.title}
+                </h3>
+                <div className="flex flex-col gap-3">
+                  {group.items.map(({ label, price, description }) => (
+                    <div
+                      key={label}
+                      className="flex items-center justify-between gap-4 bg-white rounded-[1rem] px-5 py-3.5 text-left"
+                    >
+                      <div>
+                        <span className="text-sm text-[#2C2C2C]">{label}</span>
+                        {description && (
+                          <p className="text-xs text-[#2C2C2C]/50 mt-0.5">
+                            {description}
+                          </p>
+                        )}
+                      </div>
+                      <span className="text-sm font-semibold text-[#5C4A3A] whitespace-nowrap">
+                        {price}
+                      </span>
+                    </div>
+                  ))}
+                </div>
               </div>
             ))}
           </div>
+          <p className="text-xs text-[#2C2C2C]/50 mt-8">{pricing.note}</p>
         </div>
       </section>
 
