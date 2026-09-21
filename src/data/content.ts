@@ -432,6 +432,8 @@ export const weeklySchedule: ScheduleSlot[] = [
     time: "18:00 – 19:00",
     classesByDay: {
       Lunedì: { title: "Postural Yoga Therapy", teacher: "Debora Pugi" },
+      Martedì: { title: "Hatha e Respiro che Cura", teacher: "Tatiana Pacini" },
+      Giovedì: { title: "Hatha e Respiro che Cura", teacher: "Tatiana Pacini" },
       Venerdì: { title: "Postural Therapy", teacher: "Debora Pugi" },
     },
   },
