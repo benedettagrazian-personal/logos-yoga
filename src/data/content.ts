@@ -429,15 +429,10 @@ export const weeklySchedule: ScheduleSlot[] = [
     },
   },
   {
-    time: "17:30 – 18:30",
-    classesByDay: {
-      Venerdì: { title: "Postural Therapy", teacher: "Debora Pugi" },
-    },
-  },
-  {
     time: "18:00 – 19:00",
     classesByDay: {
       Lunedì: { title: "Postural Yoga Therapy", teacher: "Debora Pugi" },
+      Venerdì: { title: "Postural Therapy", teacher: "Debora Pugi" },
     },
   },
   {
