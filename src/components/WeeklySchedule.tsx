@@ -1,4 +1,14 @@
-import { weekDays, weeklySchedule, whatsappBookingUrl } from "@/data/content";
+"use client";
+
+import { useEffect, useState } from "react";
+import Link from "next/link";
+import {
+  weekDays,
+  weeklySchedule,
+  whatsappBookingUrl,
+  classDetails,
+  teachers,
+} from "@/data/content";
 
 // Durata di default (in minuti) usata solo per il calcolo grafico quando
 // un orario non ha un intervallo esplicito (es. "19:45").
@@ -52,7 +62,16 @@ function buildTimeAxis(slots: { start: number; end: number }[]) {
   return { toPx: (t: number) => pxAt.get(t) ?? 0, totalHeight: acc };
 }
 
+interface SelectedClass {
+  day: string;
+  time: string;
+  title: string;
+  teacher: string;
+}
+
 export default function WeeklySchedule() {
+  const [selected, setSelected] = useState<SelectedClass | null>(null);
+
   const parsedSlots = weeklySchedule.map((slot) => ({
     ...slot,
     ...parseSlotTime(slot.time),
@@ -61,12 +80,32 @@ export default function WeeklySchedule() {
   const timeAxis = buildTimeAxis(parsedSlots);
   const timelineHeight = timeAxis.totalHeight;
 
+  // Chiudi il pannello con Esc.
+  useEffect(() => {
+    if (!selected) return;
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setSelected(null);
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [selected]);
+
+  const detail = selected ? classDetails[selected.title] : undefined;
+  const teacherInfo = selected
+    ? teachers.find((t) => t.name === selected.teacher)
+    : undefined;
+
   return (
     <section
       className="section-padding bg-[#F5F1EB]"
       aria-label="Calendario settimanale"
     >
       <div className="max-w-6xl mx-auto px-6">
+        <p className="text-sm text-[#2C2C2C]/60 text-center mb-6">
+          Clicca su una classe per scoprire di più sulla pratica e su chi la
+          insegna.
+        </p>
+
         {/* Timeline proporzionale (scroll orizzontale su mobile) */}
         <div className="rounded-[1.5rem] overflow-x-auto shadow-sm border border-[#E8DFD0] bg-white">
           <div
@@ -101,9 +140,18 @@ export default function WeeklySchedule() {
                   .map((slot) => {
                     const yogaClass = slot.classesByDay[day]!;
                     return (
-                      <div
+                      <button
                         key={slot.time}
-                        className="absolute inset-x-0 px-3 py-2 border-t border-[#E8DFD0]"
+                        type="button"
+                        onClick={() =>
+                          setSelected({
+                            day,
+                            time: slot.time,
+                            title: yogaClass.title,
+                            teacher: yogaClass.teacher,
+                          })
+                        }
+                        className="absolute inset-x-0 w-full px-3 py-2 border-t border-[#E8DFD0] text-left cursor-pointer transition hover:brightness-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5C4A3A] focus-visible:ring-inset"
                         style={{
                           top: timeAxis.toPx(slot.start),
                           minHeight:
@@ -121,7 +169,7 @@ export default function WeeklySchedule() {
                         <p className="text-xs text-[#2C2C2C]/55 mt-0.5">
                           {yogaClass.teacher}
                         </p>
-                      </div>
+                      </button>
                     );
                   })}
               </div>
@@ -155,6 +203,152 @@ export default function WeeklySchedule() {
           </p>
         </div>
       </div>
+
+      {/* Pannello di dettaglio classe */}
+      {selected && (
+        <div
+          className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-[#2C2C2C]/40 px-0 sm:px-6"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="class-detail-heading"
+          onClick={() => setSelected(null)}
+        >
+          <div
+            className="bg-[#F5F1EB] w-full sm:max-w-lg max-h-[85vh] overflow-y-auto rounded-t-[1.5rem] sm:rounded-[1.5rem] p-8 relative"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              type="button"
+              onClick={() => setSelected(null)}
+              aria-label="Chiudi"
+              className="absolute top-5 right-5 w-8 h-8 flex items-center justify-center rounded-full text-[#5C4A3A] hover:bg-[#E8DFD0] transition-colors"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                className="w-4 h-4"
+                aria-hidden="true"
+              >
+                <path d="M6 6l12 12M18 6L6 18" />
+              </svg>
+            </button>
+
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#9BAF9B] mb-2">
+              {selected.day} · {selected.time}
+            </p>
+            <h2
+              id="class-detail-heading"
+              className="text-2xl text-[#2C2C2C] mb-1 pr-8"
+              style={{ fontFamily: "var(--font-display), Georgia, serif" }}
+            >
+              {selected.title}
+            </h2>
+            <p className="text-sm text-[#5C4A3A] font-medium mb-6">
+              Con {selected.teacher}
+            </p>
+
+            <div className="flex flex-col gap-4">
+              {detail ? (
+                <>
+                  <p className="text-sm text-[#2C2C2C]/75 leading-relaxed">
+                    {detail.description}
+                  </p>
+                  {detail.extraSections?.map((section, i) => (
+                    <div key={i}>
+                      <p className="text-xs font-semibold uppercase tracking-widest text-[#5C4A3A] mb-2">
+                        {section.title}
+                      </p>
+                      {section.text && (
+                        <p className="text-sm text-[#2C2C2C]/75 leading-relaxed mb-2">
+                          {section.text}
+                        </p>
+                      )}
+                      {section.items && (
+                        <ul className="flex flex-col gap-2">
+                          {section.items.map((item, j) => (
+                            <li
+                              key={j}
+                              className="text-sm text-[#2C2C2C]/75 leading-relaxed pl-5 relative before:content-['●'] before:absolute before:left-0 before:text-[#9BAF9B] before:text-xs before:top-1.5"
+                            >
+                              <span className="font-semibold text-[#2C2C2C]">
+                                {item.label}:
+                              </span>{" "}
+                              {item.text}
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                    </div>
+                  ))}
+                  {detail.highlights && (
+                    <div>
+                      {detail.highlightsTitle && (
+                        <p className="text-xs font-semibold uppercase tracking-widest text-[#5C4A3A] mb-2">
+                          {detail.highlightsTitle}
+                        </p>
+                      )}
+                      <ul className="flex flex-col gap-2">
+                        {detail.highlights.map((h, i) => (
+                          <li
+                            key={i}
+                            className="text-sm text-[#2C2C2C]/75 leading-relaxed pl-5 relative before:content-['●'] before:absolute before:left-0 before:text-[#9BAF9B] before:text-xs before:top-1.5"
+                          >
+                            <span className="font-semibold text-[#2C2C2C]">
+                              {h.label}:
+                            </span>{" "}
+                            {h.text}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                  {detail.quote && (
+                    <blockquote className="border-l-2 border-[#9BAF9B] pl-4 italic text-sm text-[#2C2C2C]/75">
+                      “{detail.quote.text}”
+                      <cite className="block not-italic text-xs font-medium text-[#5C4A3A] mt-2">
+                        — {detail.quote.author}
+                      </cite>
+                    </blockquote>
+                  )}
+                  {detail.closing && (
+                    <p className="text-sm text-[#2C2C2C]/75 leading-relaxed italic">
+                      {detail.closing}
+                    </p>
+                  )}
+                </>
+              ) : (
+                <p className="text-sm text-[#2C2C2C]/60 italic">
+                  Descrizione in arrivo.
+                </p>
+              )}
+
+              {teacherInfo && (
+                <div className="border-t border-[#E8DFD0] pt-4 mt-2 flex items-center justify-between gap-4">
+                  <div>
+                    <p className="text-sm text-[#2C2C2C] font-medium">
+                      {teacherInfo.name}
+                    </p>
+                    <p className="text-xs text-[#9BAF9B] uppercase tracking-widest font-semibold">
+                      {teacherInfo.specialization}
+                    </p>
+                  </div>
+                  <Link
+                    href={`/chi-siamo#${teacherInfo.id}`}
+                    onClick={() => setSelected(null)}
+                    className="shrink-0 text-xs font-medium px-4 py-2 rounded-full bg-[#E8DFD0] text-[#5C4A3A] hover:bg-[#5C4A3A] hover:text-[#F5F1EB] transition-colors whitespace-nowrap"
+                  >
+                    Vedi profilo
+                  </Link>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 }

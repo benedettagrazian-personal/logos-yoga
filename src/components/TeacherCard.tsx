@@ -6,10 +6,13 @@ interface TeacherCardProps {
 }
 
 export default function TeacherCard({ teacher }: TeacherCardProps) {
-  const { name, role, bio, specialization, image, imageAlt, practices, certifications, philosophy } = teacher;
+  const { id, name, role, bio, specialization, image, imageAlt, practices, certifications, philosophy } = teacher;
 
   return (
-    <article className="bg-white rounded-[1.5rem] overflow-hidden hover:shadow-md transition-shadow duration-300">
+    <article
+      id={id}
+      className="bg-white rounded-[1.5rem] overflow-hidden hover:shadow-md transition-shadow duration-300 scroll-mt-28"
+    >
       <details className="group">
         {/* ── Intestazione (sempre visibile) ── */}
         <summary className="flex flex-col items-center text-center p-8 cursor-pointer list-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5C4A3A] focus-visible:ring-inset rounded-[1.5rem]">

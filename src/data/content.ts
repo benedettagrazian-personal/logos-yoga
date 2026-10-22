@@ -124,13 +124,17 @@ export const teachers: Teacher[] = [
   },
 ];
 
-// ─── Pratiche ──────────────────────────────────────────────────────────────
-// Elenco di tutte le pratiche insegnate, raccolte dai profili delle insegnanti.
+// ─── Dettagli delle classi ──────────────────────────────────────────────────
+// Descrizioni abbinate alle classi del calendario (src: weeklySchedule, sotto)
+// tramite il titolo esatto della classe. Cliccando una classe nel calendario
+// si apre un pannello con questi contenuti.
+//
+// Le voci che oggi non corrispondono a nessuno slot del calendario (es.
+// "Ayurveda", "Terapia Marma"...) restano qui pronte all'uso se in futuro
+// quella classe torna in orario.
 
-export interface Practice {
-  title: string;
+export interface ClassDetail {
   description: string;
-  teacher: string;
   extraSections?: {
     title: string;
     text?: string;
@@ -142,48 +146,26 @@ export interface Practice {
   closing?: string;
 }
 
-export const allPractices: Practice[] = [
-  {
-    title: "Yoga e Respiro che Cura",
+export const classDetails: Record<string, ClassDetail> = {
+  "Hatha e Respiro che Cura": {
     description:
       "Un percorso che usa il respiro come strumento terapeutico, per ritrovare equilibrio ed energia vitale.",
-    teacher: "Tatiana Pacini",
   },
-  {
-    title: "Yoga e Perineo",
+  "Il Respiro della Schiena": {
     description:
-      "Lavoro mirato sul pavimento pelvico, per consapevolezza e tono di una zona spesso trascurata.",
-    teacher: "Tatiana Pacini",
+      "Un lavoro dedicato alla mobilità della colonna e del bacino, dove il respiro guida il movimento per sciogliere le tensioni di schiena e postura.",
   },
-  {
-    title: "Yoga e Fibromialgia",
+  "Yoga Fibromialgia": {
     description:
       "Sequenze dolci pensate per chi convive con dolore cronico diffuso, per alleviare la tensione e ritrovare comfort nel corpo.",
-    teacher: "Tatiana Pacini",
   },
-  {
-    title: "Yoga e Colon Irritabile",
+  "Yoga Parkinson": {
     description:
-      "Pratiche di respiro e movimento dolce a supporto del benessere digestivo e della gestione dello stress.",
-    teacher: "Tatiana Pacini",
+      "Una pratica dolce e guidata, con movimenti semplici e ripetuti e un'attenzione costante al respiro, pensata per chi convive con il Parkinson.",
   },
-  {
-    title: "Yoga ed Ernia Iatale e Reflusso",
-    description:
-      "Un approccio delicato pensato per chi convive con reflusso ed ernia iatale, tra postura, respiro e rilassamento.",
-    teacher: "Tatiana Pacini",
-  },
-  {
-    title: "Yoga nelle Aziende",
-    description:
-      "Sessioni pensate per il contesto lavorativo, per gestire lo stress e migliorare postura e concentrazione durante la giornata.",
-    teacher: "Tatiana Pacini",
-  },
-  {
-    title: "Sri Sri Yoga",
+  "Sri Sri Yoga": {
     description:
       "Sri Sri Yoga è un ritorno alle radici autentiche e olistiche dello yoga. Ben oltre il semplice esercizio fisico, questa pratica integra corpo, respiro, mente e spirito in un percorso profondo di benessere e consapevolezza.",
-    teacher: "Monica Formica",
     highlightsTitle: "Gli elementi chiave",
     highlights: [
       {
@@ -210,11 +192,39 @@ export const allPractices: Practice[] = [
     closing:
       "Un viaggio di autoguarigione e scoperta interiore, per ritrovare la tua vera natura.",
   },
-  {
-    title: "Ayurveda",
+  "Meditazione e Yoga": {
+    description:
+      "Un incontro che intreccia pratica fisica e meditazione, per iniziare la settimana con calma e presenza.",
+  },
+  "Yoga, Respiro e Meditazione": {
+    description:
+      "Asana, pranayama e meditazione in un'unica sessione, per lavorare insieme su corpo, respiro e mente.",
+  },
+  "Yoga, Meditazione e Conoscenza": {
+    description:
+      "Un percorso che unisce pratica fisica, meditazione e la trasmissione della filosofia yogica.",
+  },
+  "Yoga e Meditazione": {
+    description:
+      "Una sessione che unisce movimento consapevole e meditazione, per affrontare la giornata con equilibrio.",
+  },
+  "Art of Living Satsang": {
+    description:
+      "Una serata di incontro, meditazione e canto secondo la tradizione Art of Living: un momento di comunità per ritrovare il silenzio interiore insieme ad altri praticanti.",
+  },
+  "Postural Yoga Therapy": {
+    description:
+      "Un lavoro che integra tecnica yogica e attenzione posturale: allineamento, consapevolezza corporea e cura della colonna, con un approccio pensato su misura per la persona.",
+  },
+  "Postural Therapy": {
+    description:
+      "Un lavoro che integra tecnica yogica e attenzione posturale: allineamento, consapevolezza corporea e cura della colonna, con un approccio pensato su misura per la persona.",
+  },
+
+  // ── Non attualmente a calendario ──────────────────────────────────────
+  "Ayurveda": {
     description:
       "Sri Sri Ayurveda rappresenta la purezza della medicina tradizionale indiana integrata nella vita moderna. Più che un sistema di cura, è una guida per vivere in armonia con le leggi della natura. Riconoscendo che ogni individuo ha una costituzione unica (Prakriti), offre un percorso personalizzato per mantenere o ritrovare il perfetto equilibrio psicofisico.",
-    teacher: "Monica Formica",
     highlightsTitle: "La visione olistica",
     highlights: [
       {
@@ -233,11 +243,9 @@ export const allPractices: Practice[] = [
     closing:
       "La salute è l'equilibrio tra un corpo privo di tossine, una mente in pace e un cuore colmo di gioia.",
   },
-  {
-    title: "Terapia Marma",
+  "Terapia Marma": {
     description:
       "La Terapia Marma è un'antica pratica di cura ayurvedica che agisce come un ponte tra il corpo fisico, la mente e la nostra energia vitale, il Prana. Attraverso un tocco sensibile e consapevole, questa disciplina permette di sciogliere i blocchi profondi, restituendo al corpo la sua naturale capacità di autoguarigione e rigenerazione.",
-    teacher: "Monica Formica",
     extraSections: [
       {
         title: "I punti Marma",
@@ -280,37 +288,43 @@ export const allPractices: Practice[] = [
     closing:
       "«La Terapia Marma è un viaggio di ritorno all'equilibrio naturale, dove il tocco incontra il silenzio per rigenerare la tua parte più profonda.»",
   },
-  {
-    title: "Pranayama",
+  "Yoga e Perineo": {
+    description:
+      "Lavoro mirato sul pavimento pelvico, per consapevolezza e tono di una zona spesso trascurata.",
+  },
+  "Yoga e Colon Irritabile": {
+    description:
+      "Pratiche di respiro e movimento dolce a supporto del benessere digestivo e della gestione dello stress.",
+  },
+  "Yoga ed Ernia Iatale e Reflusso": {
+    description:
+      "Un approccio delicato pensato per chi convive con reflusso ed ernia iatale, tra postura, respiro e rilassamento.",
+  },
+  "Yoga nelle Aziende": {
+    description:
+      "Sessioni pensate per il contesto lavorativo, per gestire lo stress e migliorare postura e concentrazione durante la giornata.",
+  },
+  "Pranayama": {
     description:
       "La scienza del respiro applicata alla pratica quotidiana, per calmare la mente e sostenere l'energia vitale.",
-    teacher: "Monica Formica, Debora Pugi",
   },
-  {
-    title: "Yoga sulla Sedia",
+  "Yoga sulla Sedia": {
     description:
       "Una pratica accessibile a tutti, svolta con il supporto di una sedia — ideale per chi ha mobilità ridotta.",
-    teacher: "Debora Pugi",
   },
-  {
-    title: "Yoga Posturale",
+  "Yoga Posturale": {
     description:
       "Lavoro mirato sull'allineamento e la consapevolezza corporea, per prendersi cura della colonna nella vita di ogni giorno.",
-    teacher: "Debora Pugi",
   },
-  {
-    title: "Yoga Terapia",
+  "Yoga Terapia": {
     description:
       "Un approccio che integra tecnica yogica e attenzione clinica, per accompagnare la persona in un percorso di cura personalizzato.",
-    teacher: "Debora Pugi",
   },
-  {
-    title: "Trattamento delle Patologie della Colonna Vertebrale",
+  "Trattamento delle Patologie della Colonna Vertebrale": {
     description:
       "Un lavoro specifico su postura e movimento, pensato per chi convive con problematiche alla schiena.",
-    teacher: "Debora Pugi",
   },
-];
+};
 
 // ─── Classi ────────────────────────────────────────────────────────────────
 
@@ -535,7 +549,6 @@ export const pricing: {
 export const navLinks = [
   { label: "Home", href: "/" },
   { label: "Classi", href: "/classi" },
-  { label: "Pratiche", href: "/pratiche" },
   { label: "La nostra storia", href: "/chi-siamo" },
   { label: "Obiettivi", href: "/obiettivi" },
 ];

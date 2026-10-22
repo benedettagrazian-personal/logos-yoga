@@ -109,10 +109,10 @@ export default function HomePage() {
 
           <div className="text-center mt-10">
             <Link
-              href="/pratiche"
+              href="/classi"
               className="inline-block border-2 border-[#5C4A3A] text-[#5C4A3A] font-medium px-8 py-3 rounded-full hover:bg-[#5C4A3A] hover:text-[#F5F1EB] transition-all duration-200"
             >
-              Scopri tutte le pratiche
+              Scopri il calendario classi
             </Link>
           </div>
         </div>
