@@ -466,7 +466,12 @@ export interface PricingGroup {
   items: PricingItem[];
 }
 
-export const pricing: { groups: PricingGroup[]; note: string } = {
+export const pricing: {
+  groups: PricingGroup[];
+  note: string;
+  validUntil: string;
+} = {
+  validUntil: "Fino al 31/12/26",
   groups: [
     {
       title: "Tesseramento e Iscrizione",
@@ -481,23 +486,38 @@ export const pricing: { groups: PricingGroup[]; note: string } = {
     {
       title: "Lezioni Singole e Individuali",
       items: [
-        { label: "Lezione singola (Drop-in)", price: "€10" },
-        { label: "Lezione individuale", price: "€15" },
+        { label: "Lezione singola (Drop-in)", price: "€15" },
+        { label: "Lezione individuale", price: "€20" },
       ],
     },
     {
-      title: "Pacchetti e Carnet",
+      title: "Pacchetti e Percorsi",
       items: [
         {
           label: "Pacchetto 10 lezioni",
-          price: "€80",
+          price: "€90",
           description: "Frequenza bisettimanale — validità 6 settimane",
         },
         {
           label: "Carnet 10 lezioni",
-          price: "€90",
+          price: "€100",
           description: "Frequenza libera — validità 3 mesi",
         },
+      ],
+    },
+    {
+      title: "Pacchetto PYT (Postural Yoga Therapy)",
+      items: [
+        { label: "10 lezioni di gruppo", price: "€140" },
+        { label: "5 lezioni di gruppo", price: "€75" },
+      ],
+    },
+    {
+      title: "Pacchetto PYT Personal",
+      items: [
+        { label: "10 lezioni", price: "€150" },
+        { label: "5 lezioni", price: "€80" },
+        { label: "1 lezione singola", price: "€25" },
       ],
     },
   ],

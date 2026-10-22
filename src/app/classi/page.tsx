@@ -94,11 +94,14 @@ export default function ClassiPage() {
           </p>
           <h2
             id="pricing-heading"
-            className="text-2xl md:text-3xl text-[#2C2C2C] mb-4"
+            className="text-2xl md:text-3xl text-[#2C2C2C] mb-2"
             style={{ fontFamily: "var(--font-display), Georgia, serif" }}
           >
-            Prezzi
+            Contributi promozionali
           </h2>
+          <p className="text-xs text-[#2C2C2C]/50 mb-4">
+            {pricing.validUntil}
+          </p>
           <p className="text-[#2C2C2C]/70 leading-relaxed mb-8">
             Scegli la frequenza che fa per te. Più pratichi, più il costo per
             lezione si riduce.
