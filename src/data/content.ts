@@ -422,10 +422,16 @@ export const weeklySchedule: ScheduleSlot[] = [
     },
   },
   {
-    time: "16:00 – 17:00",
+    time: "14:45 – 15:45",
     classesByDay: {
       Mercoledì: { title: "Yoga Parkinson", teacher: "Tatiana Pacini" },
       Venerdì: { title: "Yoga Parkinson", teacher: "Tatiana Pacini" },
+    },
+  },
+  {
+    time: "16:00 – 17:00",
+    classesByDay: {
+      Venerdì: { title: "Postural Yoga Therapy", teacher: "Debora Pugi" },
     },
   },
   {
