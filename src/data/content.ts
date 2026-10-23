@@ -519,7 +519,7 @@ export const pricing: {
           description: "Frequenza bisettimanale — validità 6 settimane",
         },
         {
-          label: "Carnet 10 lezioni",
+          label: "Pacchetto 10 lezioni",
           price: "€100",
           description: "Frequenza libera — validità 3 mesi",
         },
