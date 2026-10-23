@@ -514,7 +514,7 @@ export const pricing: {
       title: "Pacchetti e Percorsi",
       items: [
         {
-          label: "Pacchetto 10 lezioni",
+          label: "Percorso 10 lezioni",
           price: "€90",
           description: "Frequenza bisettimanale — validità 6 settimane",
         },
