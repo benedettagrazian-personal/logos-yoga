@@ -526,14 +526,14 @@ export const pricing: {
       ],
     },
     {
-      title: "Percorso PYT (Postural Yoga Therapy)",
+      title: "Pacchetto PYT (Postural Yoga Therapy)",
       items: [
         { label: "10 lezioni di gruppo", price: "€140" },
         { label: "5 lezioni di gruppo", price: "€75" },
       ],
     },
     {
-      title: "Percorso PYT Personal",
+      title: "Pacchetto PYT Personal",
       items: [
         { label: "10 lezioni", price: "€150" },
         { label: "5 lezioni", price: "€80" },
